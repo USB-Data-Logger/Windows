@@ -7,6 +7,17 @@
 #include <sstream>
 #include <cstring> 
 
+
+// Project Configurations
+
+const char* PORT_NAME = "COM9";                     // Set the serial port device name (replace with your Arduino port)
+const char* OUTPUT_FILE_NAME = "out.csv";           // Will store the serial data into this csv file
+DWORD baudRate = CBR_115200;                        // Set the baud rate (must match the baud rate of your Arduino)
+
+
+
+
+
 void replaceChar(std::string& str, char oldChar, char newChar) {
     size_t pos = 0;
 
@@ -41,19 +52,14 @@ bool isCSVData(const std::string &str, char targetChar, int total_occurance) {
 }
 
 int main() {
-    // Set the serial port device name (replace with your Arduino port)
-    const char* portName = "COM9";
-
 
     std::ofstream outputfile;  
-    outputfile.open("test.csv",std::ios_base::app);
- 
-    // Set the baud rate (must match the baud rate of your Arduino)
-    DWORD baudRate = CBR_115200;
+    outputfile.open(OUTPUT_FILE_NAME,std::ios_base::app);
+
 
     // Open the serial port
     HANDLE serialHandle = CreateFileA(
-        portName,
+        PORT_NAME,
         GENERIC_READ,
         0,
         NULL,

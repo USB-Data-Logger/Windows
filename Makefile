@@ -1,20 +1,15 @@
-CC = g++
-CFLAGS = -Wall
+# Makefile for Windows
 
-PROGRAM = SerialPortExample
+CC = g++  # Compiler
+SRC = src/main.cpp  # Source file
+OBJ = main.o  # Object file
+TARGET = main.exe  # Executable name
 
-# Add any additional source files here
-SRCS = main.cpp
+$(TARGET): $(OBJ)
+	$(CC) -o $(TARGET) $(OBJ)
 
-OBJS = $(SRCS:.cpp=.o)
-
-all: $(PROGRAM)
-
-$(PROGRAM): $(OBJS)
-	$(CC) $(CFLAGS) -o $(PROGRAM) $(OBJS)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ): $(SRC)
+	$(CC) -c $(SRC) -o $(OBJ)
 
 clean:
-	del $(OBJS) $(PROGRAM).exe
+	del $(TARGET) $(OBJ)
